@@ -145,3 +145,101 @@ relational-db-analysis-oracle/
 복잡한 분석 질의는 단순 동작 여부뿐 아니라
 가독성 및 유지보수성까지 고려해야 하며,
 CTE 및 Inline View 기반 구조화의 중요성을 인지하였습니다.
+
+---
+
+# Example Query Results
+
+## 1. Schema Definition
+
+### Table Creation
+
+![Schema Creation](assets/schema_creation_query.png)
+
+### Fruit Table Structure
+
+![Fruit Table Structure](assets/fruit_table_structure.png)
+
+### Store Table Structure
+
+![Store Table Structure](assets/store_table_structure.png)
+
+---
+
+## 2. Data Filtering
+
+### Conditional Filtering Result
+
+![Filtering Result](assets/filtering_result.png)
+
+---
+
+## 3. Data Transformation
+
+### BMI Calculation
+
+![BMI Transformation](assets/bmi_transformation_result.png)
+
+### CASE / DECODE Transformation
+
+![CASE DECODE Result](assets/case_decode_result.png)
+
+---
+
+## 4. Aggregation Analysis
+
+### Position Aggregation
+
+![Aggregation Result](assets/aggregation_result.png)
+
+### ROLLUP Aggregation
+
+![ROLLUP Result](assets/rollup_result.png)
+
+---
+
+## 5. JOIN Processing
+
+### Multi-table INNER JOIN
+
+![Join Result](assets/join_result.png)
+
+### Non-Equi Join
+
+![Non Equi Join Result](assets/non_equi_join_result.png)
+
+---
+
+## 6. Subquery & View
+
+### Correlated Subquery
+
+![Correlated Subquery Result](assets/correlated_subquery_result.png)
+
+### View Query
+
+![View Query Result](assets/view_query_result.png)
+
+---
+
+## 7. Analytical Functions
+
+### DENSE_RANK Analysis
+
+![Ranking Result](assets/ranking_result.png)
+
+### PIVOT Aggregation
+
+![Pivot Result](assets/pivot_result.png)
+
+---
+
+## 8. Hierarchical Query
+
+### Hierarchical Tree Structure
+
+![Hierarchy Leaf Result](assets/hierarchy_leaf_result.png)
+
+### Hierarchical Path Analysis
+
+![Hierarchy Path Result](assets/hierarchy_path_result.png)
