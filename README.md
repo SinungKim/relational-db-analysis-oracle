@@ -41,7 +41,9 @@ relational-db-analysis-oracle/
 ├── schema/
 │   ├── create_tables.sql
 │   ├── constraints.sql
-│   └── sample_insert.sql
+│   ├── sample_insert.sql
+│   ├── schema_modification.sql
+│   └── drop_tables.sql
 │
 ├── queries/
 │   ├── aggregation.sql
