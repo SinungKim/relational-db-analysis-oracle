@@ -70,6 +70,11 @@ relational-db-analysis-oracle/
 
 ---
 
+## Entity Relationship Diagram
+
+![ERD](assets/erd.png)
+---
+
 ## Core Engineering Tasks
 
 ### 1. Relational Database Modeling
