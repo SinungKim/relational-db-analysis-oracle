@@ -3,12 +3,11 @@
 ## Overview
 
 본 문서는 Oracle SQL 기반 데이터 처리 과정에서 고려한
-쿼리 최적화(Query Optimization) 및 성능 관련 개념들을 정리한 문서입니다.
+쿼리 최적화(Query Optimization) 및 성능 관련 개념을 정리한 문서입니다.
 
-실습 데이터셋은 비교적 소규모였기 때문에
-실행 속도 차이가 크게 드러나지는 않았으나,
-대규모 데이터 환경에서는 실행 계획(Execution Plan),
-인덱스(Index), JOIN 전략 등이 성능에 직접적인 영향을 준다는 점을 확인하였습니다.
+실습 데이터셋은 비교적 소규모였기 때문에 실행 속도 차이가 크게 드러나지는 않았으나,
+대규모 데이터 환경에서는 실행 계획(Execution Plan), 인덱스(Index),
+JOIN 전략, 집계 방식 등이 쿼리 성능에 직접적인 영향을 줄 수 있음을 확인하였습니다.
 
 ---
 
@@ -26,10 +25,10 @@ JOIN TEAM T
 ON P.TEAM_ID = T.TEAM_ID;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - JOIN 대상 컬럼에 Index가 없을 경우 Full Table Scan 발생 가능
-- 대용량 환경에서는 JOIN 순서가 실행 비용에 영향
+- 대용량 환경에서는 JOIN 순서와 조건 선택도가 실행 비용에 영향
 - 선택도가 높은 조건을 먼저 적용하는 것이 유리할 수 있음
 
 ---
@@ -45,7 +44,7 @@ JOIN PHYSICAL_RANGES R
 ON P.HEIGHT BETWEEN R.MIN_HEIGHT AND R.MAX_HEIGHT;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - 범위 조건 기반 JOIN은 일반 Equality Join보다 비용이 높을 수 있음
 - 범위 테이블이 작은 경우 Broadcast 성격으로 처리될 가능성 존재
@@ -67,7 +66,7 @@ WHERE EXISTS (
 );
 ```
 
-### Characteristics
+## Characteristics
 
 - 존재 여부만 확인
 - 조건 만족 시 즉시 탐색 종료 가능
@@ -86,7 +85,7 @@ WHERE STADIUM_ID IN (
 );
 ```
 
-### Characteristics
+## Characteristics
 
 - 결과 집합 전체를 비교
 - 데이터 크기에 따라 비용 증가 가능
@@ -108,7 +107,7 @@ WHERE HEIGHT < (
 );
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - 행마다 서브쿼리가 반복 수행될 수 있음
 - 대규모 환경에서는 성능 저하 가능
@@ -126,7 +125,7 @@ FROM PLAYER
 GROUP BY TEAM_ID;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - GROUP BY 대상 컬럼 Cardinality 중요
 - 집계 이전 WHERE 필터링으로 처리 데이터 감소 가능
@@ -151,7 +150,7 @@ SELECT
 FROM EMP;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - PARTITION 및 ORDER BY 수행 비용 존재
 - 데이터 규모가 클수록 Sort 연산 증가
@@ -175,7 +174,7 @@ PIVOT (
 );
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - 내부적으로 GROUP BY 기반 집계 수행
 - 다수의 Pivot Column 사용 시 비용 증가 가능
@@ -194,7 +193,7 @@ START WITH MGR IS NULL
 CONNECT BY MGR = PRIOR EMPNO;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - 계층 깊이가 깊을수록 탐색 비용 증가
 - 순환(Cycle) 구조 발생 시 문제 가능
@@ -215,7 +214,7 @@ SET SAL = SAL + 200;
 ROLLBACK TO A;
 ```
 
-### Optimization Considerations
+## Optimization Considerations
 
 - 장시간 Transaction은 Lock 유지 시간 증가 가능
 - 불필요한 COMMIT 지연은 동시성 문제 유발 가능
@@ -225,12 +224,14 @@ ROLLBACK TO A;
 
 # 10. Engineering Insight
 
-본 프로젝트를 통해 단순 SQL 문법 학습을 넘어:
+본 프로젝트를 통해 단순 SQL 문법 학습을 넘어 다음 사항이 중요하다는 점을 확인하였습니다.
 
 - 데이터 무결성 유지
 - JOIN 비용 구조 이해
 - 실행 계획 기반 최적화 필요성
 - 분석용 SQL과 운영용 SQL의 차이
 - 유지보수 가능한 질의 구조 설계
+- 집계 및 Window Function의 비용 구조 이해
 
-등이 실제 데이터 엔지니어링 환경에서 중요하다는 점을 학습하였습니다.
+또한 동일한 결과를 생성하더라도,
+질의 구조에 따라 실행 비용과 유지보수성이 크게 달라질 수 있음을 학습하였습니다.
