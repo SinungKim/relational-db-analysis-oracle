@@ -36,6 +36,34 @@ Oracle RDBMS 환경에서 관계형 데이터베이스를 직접 설계하고,
 
 ## Project Structure
 
+```text
+relational-db-analysis-oracle/
+│
+├── schema/
+│   ├── create_tables.sql
+│   ├── constraints.sql
+│   └── sample_insert.sql
+│
+├── queries/
+│   ├── aggregation.sql
+│   ├── pivot_analysis.sql
+│   ├── ranking_analysis.sql
+│   ├── correlated_subquery.sql
+│   ├── hierarchical_query.sql
+│   └── transaction_control.sql
+│
+├── docs/
+│   ├── sql_summary.md
+│   └── execution_plan_notes.md
+│
+├── optimization/
+│   └── query_optimization.md
+│
+├── results/
+│
+└── assets/
+```
+
 
 ---
 
